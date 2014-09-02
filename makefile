@@ -26,10 +26,10 @@ CXXFLAGS := $(CFLAGS)
 SOFLAGS := -g -DLINUX -shared -fPIC -Iinc
 
 LDFLAGS := -Wl,-rpath,bin,-rpath, \
-  -Lbin \
-	-lpthread -llog -lthread -ldaemon -lbm \
+	-Lbin \
+	-lpthread -pthread -llog -lthread -ldaemon -lbm \
 	-llist -ludp -lthreadpool -lconfig
-	
+    
 # vpath indicate the searching path of the according file type
 SRCDIR := src $(shell ls -d src/*)
 vpath %.c $(SRCDIR)
@@ -51,8 +51,8 @@ clean :
 	rm -f $(LIBS);\
 	rm -f $(BINS);\
 	cd ..;
-		
-		
+        
+        
 # common rules goes here, if the compiling procedure of your module matches one, 
 # no need to list it in SpecialRules
 %.so : %.c
@@ -62,7 +62,7 @@ clean :
 % : %.c
 	$(CC) $^ $(CFLAGS) $(LDFLAGS) -o $@
 	mv $@ bin/
-		
+        
 #-----------------------------------------------------------
 # for special libs/bins, add some lines like below
 #-----------------------------------------------------------

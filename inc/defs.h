@@ -2,12 +2,12 @@
 #define _DEFS_H
 
 // define function return value macro
-#define R_ERROR		-1
+#define R_ERROR -1
 #undef R_OK
-#define R_OK    0
+#define R_OK 0
 
 // typedef some data type for global use
-typedef signed char	        INT8;
+typedef signed char         INT8;
 typedef unsigned char       UINT8;
 
 typedef signed short        INT16;
@@ -20,8 +20,8 @@ typedef signed long long    INT64;
 typedef unsigned long long  UINT64;
 
 
-#define  MAX(a,b)	(((a)>(b))?(a):(b))
-#define  MIN(a,b)	(((a)<(b))?(a):(b))
+#define  MAX(a,b)    (((a)>(b))?(a):(b))
+#define  MIN(a,b)    (((a)<(b))?(a):(b))
 
 #define likely(x)   __builtin_expect(!!(x), 1)
 #define unlikely(x) __builtin_expect(!!(x), 0)

@@ -1,40 +1,45 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 #include "libdaemon.h"
 
-int daemonize(void)
+int daemonize(int nochdir, int noclose)
 {
-    pid_t pid, sid;
+#if (defined _BSD_SOURCE) || (defined _XOPEN_SOURCE && _XOPEN_SOURCE < 500)
+    return daemon(nochdir, noclose);
+#else
+    int fd;
+    int i;
     
-    /* Fork off the parent process */       
-    pid = fork();
-    if (pid < 0) {
-            exit(EXIT_FAILURE);
+    switch (fork())
+    {
+        case -1:
+            // fork failed.
+            return -1;
+        case 0:
+            // child process.
+            break;
+        default:
+            // fork success, parent exit.
+            exit(0);
     }
-    /* If we got a good PID, then
-       we can exit the parent process. */
-    if (pid > 0) {
-            exit(EXIT_SUCCESS);
-    }
-    
-    /* Change the file mode mask */
-    umask(0);
     
     /* Create a new SID for the child process */
-    sid = setsid();
-    if (sid < 0) {
-            /* Log any failure */
-            exit(EXIT_FAILURE);
-    }
+    if (setsid()) return -1;
     
     /* Change the current working directory */
-    if ((chdir("/")) < 0) {
-            /* Log any failure here */
-            exit(EXIT_FAILURE);
-    }
+    if (!nochdir) chdir("/");
     
     /* Close out the standard file descriptors */
-    close(STDIN_FILENO);
-    close(STDOUT_FILENO);
-    close(STDERR_FILENO);
+    if (!noclose)
+    {
+        for (i = 0; i < 1024; i++) close(i);
+        fd = open("/dev/null", O_RDWR);
+        dup(0); dup(0);
+    }
+    
+    return 0;
+#endif
 }
