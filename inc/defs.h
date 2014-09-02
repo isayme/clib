@@ -1,24 +1,28 @@
 #ifndef _DEFS_H
 #define _DEFS_H
 
+#include <stdint.h>
+
 // define function return value macro
 #define R_ERROR -1
 #undef R_OK
 #define R_OK 0
 
 // typedef some data type for global use
-typedef signed char         INT8;
-typedef unsigned char       UINT8;
+// use C99 <stdint.h>
+/*
+typedef signed char         int8_t;
+typedef unsigned char       uint8_t;
 
-typedef signed short        INT16;
-typedef unsigned short      UINT16;
+typedef signed short        int16_t;
+typedef unsigned short      uint16_t;
 
-typedef signed int          INT32;
-typedef unsigned int        UINT32;
+typedef signed int          int32_t;
+typedef unsigned int        uint32_t;
 
-typedef signed long long    INT64;
-typedef unsigned long long  UINT64;
-
+typedef signed long long    int64_t;
+typedef unsigned long long  uint64_t;
+*/
 
 #define  MAX(a,b)    (((a)>(b))?(a):(b))
 #define  MIN(a,b)    (((a)<(b))?(a):(b))

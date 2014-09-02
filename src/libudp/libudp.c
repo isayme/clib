@@ -14,7 +14,7 @@ static SOCK_INFO g_sockinfo = {0};
 
 static void udp_callback(void *arg);
 
-int udp_init(UINT16 port, void *func)
+int udp_init(uint16_t port, void *func)
 {
     int sockfd;
     struct sockaddr_in addr;
@@ -87,7 +87,7 @@ int udp_uninit()
     return R_OK;
 }
 
-int udp_reply(struct sockaddr addr, UINT8 *buff, UINT16 blen)
+int udp_reply(struct sockaddr addr, uint8_t *buff, uint16_t blen)
 {
     int cnt;
 
@@ -108,7 +108,7 @@ int udp_reply(struct sockaddr addr, UINT8 *buff, UINT16 blen)
     return cnt;
 }
 
-int udp_send(UINT8 *dip, UINT16 dport, UINT8 *buff, UINT16 blen)
+int udp_send(uint8_t *dip, uint16_t dport, uint8_t *buff, uint16_t blen)
 {
     struct sockaddr_in addr;
     int cnt;

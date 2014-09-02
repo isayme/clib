@@ -10,7 +10,7 @@
 
 static FILE *g_cfg_fp = NULL;
 
-INT32 libconfig_open(char *cfg_path)
+int32_t libconfig_open(char *cfg_path)
 {
     if (NULL == cfg_path)
     {
@@ -34,7 +34,7 @@ INT32 libconfig_open(char *cfg_path)
     return R_OK;
 }
 
-INT32 libconfig_close()
+int32_t libconfig_close()
 {
     if (NULL == g_cfg_fp)
     {
@@ -47,7 +47,7 @@ INT32 libconfig_close()
     return R_OK;
 }
 
-INT32 libconfig_get_cfg(char *key, char *value, INT32 value_len)
+int32_t libconfig_get_cfg(char *key, char *value, int32_t value_len)
 {
     char *line = NULL;
     char *real_line = NULL;
@@ -75,7 +75,7 @@ INT32 libconfig_get_cfg(char *key, char *value, INT32 value_len)
         real_line = line;
 
         // 去除行首空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
 
         // 注释行，跳过
         if ('#' == real_line[0])
@@ -91,18 +91,18 @@ INT32 libconfig_get_cfg(char *key, char *value, INT32 value_len)
         real_line = tmp + strlen(key);
 
         // 去除等号左测空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
         // 必须是等号，是则跳过等号，否则跳过整行
         if ('=' != real_line[0])
             continue;
         else
             real_line++;
         // 去除等号右测空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
         
         // 统计有效字符长度
         tmp = real_line;
-        while (0 != isprint((INT32)*(real_line)) && 0 == isspace((INT32)*(real_line))) real_line++;
+        while (0 != isprint((int32_t)*(real_line)) && 0 == isspace((int32_t)*(real_line))) real_line++;
         
         if ((real_line == tmp) || ((real_line - tmp) > value_len))
         {
@@ -126,7 +126,7 @@ INT32 libconfig_get_cfg(char *key, char *value, INT32 value_len)
     return R_ERROR;
 }
 
-INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
+int32_t get_cfg_from_file(char *key, char *value, int32_t value_len, char *cfg_path)
 {
     FILE *fp = NULL;
     char *line = NULL;
@@ -155,7 +155,7 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
         real_line = line;
 
         // 去除行首空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
 
         // 注释行，跳过
         if ('#' == real_line[0])
@@ -171,18 +171,18 @@ INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path)
         real_line = tmp + strlen(key);
 
         // 去除等号左测空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
         // 必须是等号，是则跳过等号，否则跳过整行
         if ('=' != real_line[0])
             continue;
         else
             real_line++;
         // 去除等号右测空格/制表符等无意义字符
-        while (0 != isspace((INT32)*(real_line))) real_line++;
+        while (0 != isspace((int32_t)*(real_line))) real_line++;
         
         // 统计有效字符长度
         tmp = real_line;
-        while (0 != isprint((INT32)*(real_line)) && 0 == isspace((INT32)*(real_line))) real_line++;
+        while (0 != isprint((int32_t)*(real_line)) && 0 == isspace((int32_t)*(real_line))) real_line++;
         
         if ((real_line == tmp) || ((real_line - tmp) > value_len))
         {

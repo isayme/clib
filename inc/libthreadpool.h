@@ -22,8 +22,8 @@ typedef struct thread_pool_s {
     tp_worker_t *t_worker;
     tp_worker_t *t_head;
     tp_worker_t *t_tail;
-    INT32 t_num;  // thread number
-    UINT8 flags;    // RUNNING, STOPPING 
+    int32_t t_num;  // thread number
+    uint8_t flags;    // RUNNING, STOPPING 
 }thread_pool_t;
 
 struct tp_worker_s {
@@ -31,18 +31,18 @@ struct tp_worker_s {
     pthread_mutex_t lock;
     pthread_cond_t cond;
     pthread_t tid;              // thread id
-    INT32 id;                   // worker id
+    int32_t id;                   // worker id
     tp_func func;               // user function
     void *arg;                  // user function argument
     
-    UINT8 flags;                // not use
+    uint8_t flags;                // not use
     struct tp_worker_s *next;   // pointer to next idle thread
 };
 
 thread_pool_t *tp_create(int t_num);
 
-INT32 tp_add_task(thread_pool_t *tp, tp_func fn, void *arg);
+int32_t tp_add_task(thread_pool_t *tp, tp_func fn, void *arg);
 
-INT32 tp_destroy(thread_pool_t *tp);
+int32_t tp_destroy(thread_pool_t *tp);
 
 #endif

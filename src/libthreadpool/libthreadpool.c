@@ -114,7 +114,7 @@ _err:
 }
 
 
-INT32 tp_add_task(thread_pool_t *tp, tp_func fn, void *arg)
+int32_t tp_add_task(thread_pool_t *tp, tp_func fn, void *arg)
 {
     tp_worker_t *worker;
     
@@ -146,7 +146,7 @@ INT32 tp_add_task(thread_pool_t *tp, tp_func fn, void *arg)
     return R_OK;
 }
 
-INT32 tp_destroy(thread_pool_t *tp)
+int32_t tp_destroy(thread_pool_t *tp)
 {
     int i;
     

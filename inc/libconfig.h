@@ -3,10 +3,10 @@
 
 #include "defs.h"
 
-INT32 libconfig_open(char *cfg_path);
-INT32 libconfig_close();
-INT32 libconfig_get_cfg(char *key, char *value, INT32 value_len);
+int32_t libconfig_open(char *cfg_path);
+int32_t libconfig_close();
+int32_t libconfig_get_cfg(char *key, char *value, int32_t value_len);
 
-INT32 get_cfg_from_file(char *key, char *value, INT32 value_len, char *cfg_path);
+int32_t get_cfg_from_file(char *key, char *value, int32_t value_len, char *cfg_path);
 
 #endif

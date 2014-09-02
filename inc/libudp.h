@@ -17,9 +17,9 @@ typedef struct{
     CALLBACK func;
 }SOCK_INFO;
 
-int udp_init(UINT16 port, void *func);
+int udp_init(uint16_t port, void *func);
 int udp_uninit();
-int udp_reply(struct sockaddr addr, UINT8 *buff, UINT16 blen);
-int udp_send(UINT8 *dip, UINT16 dport, UINT8 *buff, UINT16 blen);
+int udp_reply(struct sockaddr addr, uint8_t *buff, uint16_t blen);
+int udp_send(uint8_t *dip, uint16_t dport, uint8_t *buff, uint16_t blen);
 
 #endif
